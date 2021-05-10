@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<robot name="rb1_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- custom stuff -->
+    <xacro:property name="uh_fov" value="0.2967" />
+    <xacro:property name="base_link_name" value="robot_base_link" />
+
+    <joint type="fixed" name="custom_joint">
+        <origin xyz="0.0 0 1.5" rpy="0 0 0" />
+        <child link="custom_link" />
+        <parent link="${base_link_name}" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name='custom_link'>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+        <collision name='collision'>
+            <origin xyz="0.05 0 -.5" rpy=" 0 0 0" />
+            <geometry>
+                <!--mesh filename = "package://biscee_simulation/meshes/rb1.dae"/-->
+                <cylinder length="1.0" radius="0.20" />
+            </geometry>
+        </collision>
+        <visual name='base_link_visual'>
+            <!--origin xyz="-0.250091 0.461716 -0.006178" rpy=" 0 0 0" /-->
+            <origin xyz="-0.250 0.462 -1.67" rpy=" 0 0 0" />
+            <!--origin xyz="0.05 0 -.5" rpy=" 0 0 0" /-->
+            <geometry>
+                <!--box size=".4 .2 .1"/-->
+                <mesh filename = "package://biscee_simulation/meshes/biscee.dae"/>
+                <!--cylinder length="1.0" radius="0.20" /-->
+            </geometry>
+            <material name="orange" />
+        </visual>
+    </link>
+
+    <joint name="uh_front_joint" type="fixed">
+        <axis xyz="0 1 0" />
+        <origin rpy="0 0 0" xyz="0.265 0 0.775" />
+        <parent link="${base_link_name}" />
+        <child link="base_uh_front" />
+    </joint>
+
+    <link name="base_uh_front">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_uh_front">
+        <sensor type="ray" name="TeraRanger">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>50</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>2</max>
+                    <resolution>0.02</resolution>
+                </range>
+            </ray>
+            <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+                <gaussianNoise>0.005</gaussianNoise>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <topicName>sensor/uh_front</topicName>
+                <frameName>base_uh_front</frameName>
+                <radiation>ULTRASOUND</radiation>
+                <fov>${uh_fov}</fov>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="uh_right_joint" type="fixed">
+        <axis xyz="0 1 0" />
+        <origin rpy="0 0 -0.8727" xyz="0.1918 -0.1570 0.775" />
+        <parent link="${base_link_name}" />
+        <child link="base_uh_right" />
+    </joint>
+
+    <link name="base_uh_right">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_uh_right">
+        <sensor type="ray" name="TeraRanger">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>50</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>2</max>
+                    <resolution>0.02</resolution>
+                </range>
+            </ray>
+            <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+                <gaussianNoise>0.005</gaussianNoise>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <topicName>sensor/uh_right</topicName>
+                <frameName>base_uh_right</frameName>
+                <radiation>ULTRASOUND</radiation>
+                <fov>${uh_fov}</fov>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="uh_right_rear_joint" type="fixed">
+        <axis xyz="0 1 0" />
+        <origin rpy="0 0 -1.7454" xyz="0.0235 -0.2019 0.775" />
+        <parent link="${base_link_name}" />
+        <child link="base_uh_right_rear" />
+    </joint>
+
+    <link name="base_uh_right_rear">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_uh_right_rear">
+        <sensor type="ray" name="TeraRanger">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>50</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>2</max>
+                    <resolution>0.02</resolution>
+                </range>
+            </ray>
+            <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+                <gaussianNoise>0.005</gaussianNoise>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <topicName>sensor/uh_right_rear</topicName>
+                <frameName>base_uh_right_rear</frameName>
+                <radiation>ULTRASOUND</radiation>
+                <fov>${uh_fov}</fov>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="uh_left_joint" type="fixed">
+        <axis xyz="0 1 0" />
+        <origin rpy="0 0 0.8727" xyz="0.1918 0.1570 0.775" />
+        <parent link="${base_link_name}" />
+        <child link="base_uh_left" />
+    </joint>
+
+    <link name="base_uh_left">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_uh_left">
+        <sensor type="ray" name="TeraRanger">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>50</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>2</max>
+                    <resolution>0.02</resolution>
+                </range>
+            </ray>
+            <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+                <gaussianNoise>0.005</gaussianNoise>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <topicName>sensor/uh_left</topicName>
+                <frameName>base_uh_left</frameName>
+                <radiation>ULTRASOUND</radiation>
+                <fov>${uh_fov}</fov>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="uh_left_rear_joint" type="fixed">
+        <axis xyz="0 1 0" />
+        <origin rpy="0 0 1.7454" xyz="0.0235 0.2019 0.775" />
+        <parent link="${base_link_name}" />
+        <child link="base_uh_left_rear" />
+    </joint>
+
+    <link name="base_uh_left_rear">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.01 0.01 0.01" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="1e-5" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+    </link>
+
+    <gazebo reference="base_uh_left_rear">
+        <sensor type="ray" name="TeraRanger">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>50</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>10</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-0.14835</min_angle>
+                        <max_angle>0.14835</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>0.01</min>
+                    <max>2</max>
+                    <resolution>0.02</resolution>
+                </range>
+            </ray>
+            <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+                <gaussianNoise>0.005</gaussianNoise>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>50</updateRate>
+                <topicName>sensor/uh_left_rear</topicName>
+                <frameName>base_uh_left_rear</frameName>
+                <radiation>ULTRASOUND</radiation>
+                <fov>${uh_fov}</fov>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+
+</robot>

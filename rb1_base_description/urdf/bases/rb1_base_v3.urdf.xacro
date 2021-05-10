@@ -141,6 +141,9 @@
   <!-- DOCKING LINK -->
   <link name="${prefix}base_docking_contact_link" />
 
+  <!-- Import custom stuff -->
+  <xacro:include filename="$(find rb1_base_description)/urdf/custom_stuff/custom_stuff.urdf.xacro"/>
+
 
   </xacro:macro>
 </robot>
