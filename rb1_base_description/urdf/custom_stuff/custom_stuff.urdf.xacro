@@ -30,12 +30,15 @@
             <!--origin xyz="0.05 0 -.5" rpy=" 0 0 0" /-->
             <geometry>
                 <!--box size=".4 .2 .1"/-->
-                <mesh filename = "package://rb1_base_description/urdf/biscee/biscee.dae"/>
+                <mesh filename="package://rb1_base_description/urdf/biscee/biscee.dae" />
                 <!--cylinder length="1.0" radius="0.20" /-->
             </geometry>
             <material name="orange" />
         </visual>
     </link>
+
+    <!-- Camera (does not work under Virtualbox -->
+    <!-- xacro:include filename="$(find rb1_base_description)/urdf/custom_stuff/camera_with_base.urdf.xacro"/-->
 
     <joint name="uh_front_joint" type="fixed">
         <axis xyz="0 1 0" />
