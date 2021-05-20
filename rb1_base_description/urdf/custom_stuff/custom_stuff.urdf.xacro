@@ -70,7 +70,7 @@
     <gazebo reference="base_uh_front">
         <sensor type="ray" name="TeraRanger">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>50</update_rate>
             <ray>
                 <scan>
@@ -135,7 +135,7 @@
     <gazebo reference="base_uh_right">
         <sensor type="ray" name="TeraRanger">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>50</update_rate>
             <ray>
                 <scan>
@@ -200,7 +200,7 @@
     <gazebo reference="base_uh_right_rear">
         <sensor type="ray" name="TeraRanger">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>50</update_rate>
             <ray>
                 <scan>
@@ -265,7 +265,7 @@
     <gazebo reference="base_uh_left">
         <sensor type="ray" name="TeraRanger">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>50</update_rate>
             <ray>
                 <scan>
@@ -330,7 +330,7 @@
     <gazebo reference="base_uh_left_rear">
         <sensor type="ray" name="TeraRanger">
             <pose>0 0 0 0 0 0</pose>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
             <update_rate>50</update_rate>
             <ray>
                 <scan>
